@@ -12,7 +12,8 @@ export default class Chat {
     getTestChat(to, from, config = {}) {
         const url = `getTestChat`
         const params = {
-
+            to,
+            from
         }
         return this.client.post(url, params, config)
     }
@@ -20,7 +21,9 @@ export default class Chat {
     sendTestMsg(to, from, body, config = {}) {
         const url = `sendTestMsg`
         const params = {
-
+            to,
+            from,
+            body
         }
         return this.client.post(url, params, config)
     }

@@ -76,6 +76,14 @@ class Chat extends Component {
 
         try {
             await this.submitMessage(body)
+
+            // Refresh when successful
+            if (this.historyFetchTimer)
+                clearTimeout(this.historyFetchTimer)
+
+            try {
+                await this.loadChatHistory()
+            } catch (err) {}
         } catch(err) {
             // handled globally via interceptors
         }
@@ -89,7 +97,7 @@ class Chat extends Component {
             // Todo:: If successful, push to array of messages
 
             // Error
-            if (resp.data.error === false) {
+            if (resp.data.error === true) {
                 toast.error('Unable to process your request')
                 throw new Error()
             }
